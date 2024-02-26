@@ -1,0 +1,196 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, rgb(255, 99, 71), rgb(75, 192, 192), rgb(153, 102, 255));
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Estilo general para los divs */
+div {
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Estilo específico para el div de administrador */
+div.admin {
+    width: 400px; /* Aumenta el ancho */
+    height: 200px; /* Aumenta la altura */
+    background-color: #e3f2fd; /* Azul claro */
+    border: 1px solid #bbdefb;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex; /* Añadido para centrar el texto */
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center; /* Centra el texto verticalmente */
+    text-align: center; /* Alinea el texto al centro */
+}
+
+/* Estilo específico para el div de usuario */
+div.user {
+    width: 400px; /* Aumenta el ancho */
+    height: 200px; /* Aumenta la altura */
+    background-color: #e8f5e9; /* Verde claro */
+    border: 1px solid #c8e6c9;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex; /* Añadido para centrar el texto */
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center; /* Centra el texto verticalmente */
+    text-align: center; /* Alinea el texto al centro */
+}
+
+/* Efecto al pasar el ratón por encima */
+div.admin:hover, div.user:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Aumenta la sombra al pasar el ratón por encima */
+    transform: scale(1.02);
+}
+
+/* Estilo para el contenedor que alinea los divs en el centro y uno al lado del otro */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 600px;
+    flex: 1 0 auto;
+}
+
+/* Estilo para el footer */
+.footer {
+    height: 60px;
+    background-color: #90e0cc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 1px solid #e0e0e0;
+    flex-shrink: 0;
+}
+
+/* Estilos responsivos para pantallas menores a 600px */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+    }
+
+    div {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+.header{
+    background-color: #90e0cc;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.header h1 {
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-30px); }
+    60% { transform: translateY(-15px); }
+}
+/*-------------------------------------*/
+/* estilos de menuUsuario */
+.login-page {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+.login-page h1 {
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.login-page form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.login-page input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.login-page button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-page button:hover, .login-page button:active, .login-page button:focus {
+    background: #43A047;
+}
+/* Estilo para el contenedor del formulario de inicio de sesión */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilo para el formulario de inicio de sesión */
+.login-form {
+    width: 300px;
+    padding: 30px;
+    background: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+/* Estilo para los campos de entrada del formulario de inicio de sesión */
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Estilo para el botón de envío del formulario de inicio de sesión */
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #007BFF;
+    color: #ffffff;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-form button:hover {
+    background: #0056b3;
+}
