@@ -8,98 +8,17 @@ body {
     min-height: 100vh;
 }
 
-/* Estilo general para los divs */
-div {
-    margin: 10px;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* Estilo específico para el div de administrador */
-div.admin {
-    width: 400px; /* Aumenta el ancho */
-    height: 200px; /* Aumenta la altura */
-    background-color: #e3f2fd; /* Azul claro */
-    border: 1px solid #bbdefb;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    display: flex; /* Añadido para centrar el texto */
-    justify-content: center; /* Centra el texto horizontalmente */
-    align-items: center; /* Centra el texto verticalmente */
-    text-align: center; /* Alinea el texto al centro */
-}
-
-/* Estilo específico para el div de usuario */
-div.user {
-    width: 400px; /* Aumenta el ancho */
-    height: 200px; /* Aumenta la altura */
-    background-color: #e8f5e9; /* Verde claro */
-    border: 1px solid #c8e6c9;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2); /* Aumenta la sombra */
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    display: flex; /* Añadido para centrar el texto */
-    justify-content: center; /* Centra el texto horizontalmente */
-    align-items: center; /* Centra el texto verticalmente */
-    text-align: center; /* Alinea el texto al centro */
-}
-
-/* Efecto al pasar el ratón por encima */
-div.admin:hover, div.user:hover {
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3); /* Aumenta la sombra al pasar el ratón por encima */
-    transform: scale(1.02);
-}
-
-/* Estilo para el contenedor que alinea los divs en el centro y uno al lado del otro */
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 600px;
-    flex: 1 0 auto;
-}
-
-/* Estilo para el footer */
-.footer {
-    height: 60px;
-    background-color: #90e0cc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-top: 1px solid #e0e0e0;
-    flex-shrink: 0;
-}
-
-/* Estilos responsivos para pantallas menores a 600px */
-@media (max-width: 600px) {
-    .container {
-        flex-direction: column;
-    }
-
-    div {
-        width: 100%;
-        margin: 10px 0;
-    }
-}
-
-.header{
-    background-color: #90e0cc;
-    color: #333;
-    text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid #e0e0e0;
-}
-.header h1 {
-    animation: bounce 2s infinite;
-}
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-30px); }
-    60% { transform: translateY(-15px); }
-}
-/*-------------------------------------*/
 /* estilos de menuUsuario */
+.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
 .login-page {
     width: 360px;
     padding: 8% 0 0;
