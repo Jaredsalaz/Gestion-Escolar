@@ -113,3 +113,161 @@ body {
 .login-form button:hover {
     background: #0056b3;
 }
+
+
+/*estilo para inicio*/
+.body-2 {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, rgb(70, 130, 180), rgb(128, 128, 128), rgb(25, 25, 112));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.header-div {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+
+.menu-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.menu-nav li {
+    float: left;
+}
+
+.menu-nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.menu-nav li a:hover {
+    background-color: #111;
+}
+
+
+.hidden-item {
+    display: none;
+}
+.nav-item {
+    transition: max-height 0.9s ease-out, transform 2s;
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+.nav-item:not(.hidden-item) {
+    transform: scaleX(1);
+}
+
+#navButton {
+    background-color: #708090; /* SlateGray */
+    color: white;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#navButton:hover {
+    background-color: #4682B4; /* SteelBlue */
+}
+.profile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.welcome-message {
+    color: rgb(0, 0, 0);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 18px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #333; /* Color del texto */
+    font-family: Arial, sans-serif; /* Fuente del texto */
+}
+
+table, th, td {
+    border: 1px solid #ddd; /* Color del borde */
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #708090; /* Color de fondo del encabezado */
+    color: white; /* Color del texto de las celdas del encabezado */
+}
+
+td {
+    background-color: #f2f2f2; /* Color de fondo de las celdas del cuerpo */
+}
+
+tr:hover {background-color: #f5f5f5;} /* Color de fondo de las filas al pasar el ratón por encima */
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+[contentEditable=true]:empty:not(:focus):before {
+    content: attr(data-placeholder);
+    color: #888;
+}
+button {
+    background-color: #849c93; /* Color de fondo dorado */
+    border: none; /* Sin bordes */
+    color: #000000; /* Color del texto negro */
+    padding: 15px 32px; /* Espaciado alrededor del texto */
+    text-align: center; /* Alineación del texto */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer; /* Cambia el cursor al pasar el ratón por encima */
+    transition-duration: 0.4s; /* Duración de la transición */
+}
+
+button:hover {
+    background-color: #4682B4; 
+}
+.table-container {
+    margin-top: 10px;
+    background-color: #fff; /* Color de fondo blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1); /* Sombra alrededor del div */
+    padding: 20px; /* Espaciado alrededor de la tabla */
+    margin-bottom: 20px; /* Espaciado debajo del div */
+}

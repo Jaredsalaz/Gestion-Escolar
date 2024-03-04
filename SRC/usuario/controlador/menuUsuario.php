@@ -2,7 +2,7 @@
 // Iniciar sesión
 session_start();
 
-// Incluir el archivo de conexión a la base de datos
+// Incluimos el archivo de conexión a la base de datos
 include 'modelo/conexion.php';
 
 // Variable para almacenar el mensaje de error
