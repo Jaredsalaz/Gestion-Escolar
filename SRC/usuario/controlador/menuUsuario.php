@@ -5,9 +5,6 @@ session_start();
 // Incluimos el archivo de conexión a la base de datos
 include 'modelo/conexion.php';
 
-// Variable para almacenar el mensaje de error
-$error = '';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Obtener los datos del formulario
     $correo = $_POST['email'];
@@ -44,11 +41,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit;
         } else {
             // La contraseña es incorrecta
-            $error = "La contraseña es incorrecta.";
+            echo "<script>
+            window.addEventListener('load', function() {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'La contraseña es incorrecta.',
+                })
+            })
+            </script>";
         }
     } else {
         // El correo no existe en la base de datos
-        $error = "El correo no existe.";
+        echo "<script>
+        window.addEventListener('load', function() {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'El correo no existe.',
+            })
+        })
+        </script>";
     }
 
     // Cerramos la declaración y la conexión
@@ -57,6 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
+<!-- Aquí comienza tu HTML -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,13 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="email" name="email" placeholder="Correo electrónico" required onclick="clearError()">
             <input type="password" name="psw" placeholder="Contraseña" required>
             <button type="submit">Iniciar sesión</button>            
-            <?php if ($error): ?>
-                <div class="error">
-                    <?php echo $error; ?>
-                </div>
-            <?php endif; ?>
         </form>
     </div>
-    <script src="scriptMenu.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function clearError() {
+            Swal.close();
+        }
+    </script>
 </body>
 </html>
