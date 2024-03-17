@@ -41,6 +41,7 @@ if(isset($_SESSION['email'])) {
 <body class="body-2">
     <h1>Registro de alumnos</h1>
     <button type="button" id="registrar">Registrar</button>
+    <button type="button" id="Reporte-general">Reporte General</button>
     <div class="header-div">
         <header>
             <nav class="menu-nav">
@@ -69,6 +70,7 @@ if(isset($_SESSION['email'])) {
                     <th>Grado y Grupo</th>
                     <th>Modificar</th>
                     <th>Eliminar</th>
+                    <th>Reporte</th>
                     
                 </tr>
             </thead>
@@ -91,6 +93,7 @@ if(isset($_SESSION['email'])) {
                     echo "<td>" . $row['idgradogrupo'] . "</td>";
                     echo "<td><button class='btn-modificar'>Modificar</button></td>";
                     echo "<td><button class='btn-eliminar'>Eliminar</button></td>";
+                    echo "<td><button class='btn-reporte-individual'>Reporte</button></td>";
                     echo "</tr>";
                     $num = $num + 1;
                 }
@@ -106,6 +109,19 @@ if(isset($_SESSION['email'])) {
 
 
     <script>
+        // Agrega un evento de clic al botón de reporte general
+        document.getElementById('Reporte-general').addEventListener('click', function() {
+            window.location.href = '../funciones.php?reporte_general=true';
+        });
+
+        // Agrega un evento de clic a los botones de reporte individual
+        document.querySelectorAll('.btn-reporte-individual').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var row = this.parentElement.parentElement;
+                var matricula = row.children[1].textContent;
+                window.location.href = '../funciones.php?matricula=' + matricula;
+            });
+        });
 
         // Agrega fila a la tabla
         document.getElementById('addRow').addEventListener('click', function() {
@@ -120,38 +136,47 @@ if(isset($_SESSION['email'])) {
             modifyCell.innerHTML = '<button type="button">Modificar</button>';
             var deleteCell = row.insertCell(7);
             deleteCell.innerHTML = '<button type="button">Eliminar</button>';
+            var reportCell = row.insertCell(8);
+            reportCell.innerHTML = '<button type="button">Reporte</button>';
         });
+        //Para registrar un nuevo alumno
+        if (!document.getElementById('registrar').hasEventListener) {
+            document.getElementById('registrar').addEventListener('click', function(event) {
+                // Previene la acción predeterminada del evento de clic
+                event.preventDefault();
 
-        // Agrega un evento de clic al botón de registrar
-        document.getElementById('registrar').addEventListener('click', function() {
-            var table = document.getElementById('editableTable');
-            var row = table.rows[table.rows.length - 1];
-            var data = {
-                matricula: row.cells[1].textContent,
-                nombre: row.cells[2].textContent,
-                apaterno: row.cells[3].textContent,
-                amaterno: row.cells[4].textContent,
-                idgradogrupo: row.cells[5].textContent
-            };
-            fetch('../funciones.php', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            }).then(function(response) {
-                if (response.ok) {
-                    return response.text();
-                } else {
-                    throw new Error('Error: ' + response.statusText);
-                }
-            }).then(function(text) {
-                // Muestra una alerta con el resultado de la inserción
-                alert(text);
-            }).catch(function(error) {
-                console.log('Request failed', error);
+                var table = document.getElementById('editableTable');
+                var row = table.rows[table.rows.length - 1];
+                var data = {
+                    matricula: row.cells[1].textContent,
+                    nombre: row.cells[2].textContent,
+                    apaterno: row.cells[3].textContent,
+                    amaterno: row.cells[4].textContent,
+                    idgradogrupo: row.cells[5].textContent
+                };
+                fetch('../funciones.php', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                }).then(function(response) {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('Error: ' + response.statusText);
+                    }
+                }).then(function(text) {
+                    // Muestra una alerta con el resultado de la inserción
+                    alert(text);
+                }).catch(function(error) {
+                    console.log('Request failed', error);
+                });
             });
-        });
+
+            // Marca el botón como que ya tiene un evento de clic vinculado
+            document.getElementById('registrar').hasEventListener = true;
+        }
         
         //navegacion
         document.getElementById('navButton').addEventListener('click', function() {

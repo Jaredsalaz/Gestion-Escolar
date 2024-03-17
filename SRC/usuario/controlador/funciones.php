@@ -114,4 +114,129 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     $result = insertarAlumno($data);
     echo $result;
 }
-?>
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+function reporteIndividual($matricula) {
+    global $conn;
+
+    // Preparamos la consulta SQL para obtener los datos del alumno
+    $sql = "SELECT * FROM t_alumnos WHERE matricula = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    // Vincula la matrícula a la consulta
+    mysqli_stmt_bind_param($stmt, "s", $matricula);
+    // Ejecuta la consulta
+    if (mysqli_stmt_execute($stmt)) {
+        // Si la consulta se ejecutó con éxito, recoge los resultados
+        $result = mysqli_stmt_get_result($stmt);
+        $alumno = mysqli_fetch_assoc($result);
+
+        // Aquí generaramos el PDF con los datos del alumno
+        require('fpdf186/fpdf.php');
+
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 16);
+
+        // Agregamos el título al PDF
+        $pdf->Cell(0, 10, 'Reporte Individual', 0, 1, 'C');
+
+        // Agrega una separación entre el título y el contenido
+        $pdf->Ln(10);
+
+        // Agrega los datos del alumno al PDF
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Matricula: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['matricula'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Nombre: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['nombre'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Apellido Paterno: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['apaterno'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Apellido Materno: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['amaterno'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'ID Grado Grupo: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['idgradogrupo'], 0, 1);
+
+        // Genera el PDF
+        $pdf->Output();
+        exit;
+    } else {
+        // Si hubo un error, devuelve un mensaje de error
+        return "Error al obtener datos del alumno: " . mysqli_error($conn);
+    }
+}
+// Si se recibe una solicitud GET con una matrícula, genera el reporte individual
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['matricula'])) {
+    reporteIndividual($_GET['matricula']);
+}
+////////////////////////////////////////////////////////////////////////////////////////
+function reporteGeneral() {
+    global $conn;
+
+    // Preparamos la consulta SQL para obtener los datos de todos los alumnos
+    $sql = "SELECT * FROM t_alumnos";
+    $result = mysqli_query($conn, $sql);
+
+    // Aquí generamos el PDF con los datos de todos los alumnos
+    require('fpdf186/fpdf.php');
+
+    $pdf = new FPDF();
+    $pdf->AddPage();
+    $pdf->SetFont('Arial', 'B', 16);
+
+    // Agregamos el título al PDF
+    $pdf->Cell(0, 10, 'Reporte General', 0, 1, 'C');
+
+    // Agrega una separación entre el título y el contenido
+    $pdf->Ln(10);
+
+    // Agrega los datos de todos los alumnos al PDF
+    while ($alumno = mysqli_fetch_assoc($result)) {
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Matricula: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['matricula'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Nombre: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['nombre'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Apellido Paterno: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['apaterno'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'Apellido Materno: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['amaterno'], 0, 1);
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->Cell(40, 10, 'ID Grado Grupo: ', 0, 0);
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(0, 10, $alumno['idgradogrupo'], 0, 1);
+
+        // Agrega una separación entre cada alumno
+        $pdf->Ln(10);
+
+        // Agrega una línea horizontal
+        $pdf->Line(10, $pdf->GetY(), $pdf->GetPageWidth() - 10, $pdf->GetY());
+    }
+
+    // Genera el PDF
+    $pdf->Output();
+    exit;
+}
+
+// Si se recibe una solicitud GET con el parámetro 'reporte_general', genera el reporte general
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['reporte_general'])) {
+    reporteGeneral();
+}
